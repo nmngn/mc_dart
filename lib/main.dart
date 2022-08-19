@@ -7,31 +7,71 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp();
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  static const String _title = 'Flutter Code Sample';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(); // This trailing comma makes auto-formatting nicer for build methods.
+    return const MaterialApp(
+      title: _title,
+      home: MyStatelessWidget(),
+    );
   }
+}
+
+class MyStatelessWidget extends StatelessWidget {
+  const MyStatelessWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: const Color(0xFF3F5AA6),
+            title: const Text("Title text"),
+          ),
+          bottomNavigationBar: menu(),
+          body: TabBarView(
+            children: [
+              Container(child: Icon(Icons.directions_car)),
+              Container(child: Icon(Icons.directions_transit)),
+              Container(child: Icon(Icons.directions_bike)),
+              Container(child: Icon(Icons.directions_bike)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Widget menu() {
+  return Container(
+      color: const Color(0xFF3F5AA6),
+      child: const TabBar(
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.white70,
+        indicatorSize: TabBarIndicatorSize.tab,
+        indicatorPadding: EdgeInsets.all(5.0),
+        indicatorColor: Colors.blue,
+        tabs: [
+          Tab(
+            text: "Transactions",
+            icon: Icon(Icons.euro_symbol),
+          ),
+          Tab(
+            text: "Bills",
+            icon: Icon(Icons.assignment),
+          ),
+          Tab(
+            text: "Balance",
+            icon: Icon(Icons.account_balance_wallet),
+          ),
+          Tab(
+            text: "Options",
+            icon: Icon(Icons.settings),
+          ),
+        ],
+      ));
 }

@@ -1,7 +1,9 @@
+import 'package:mc_dart/constants/assets.dart';
+import 'package:mc_dart/ui/account/account.dart';
 import 'package:flutter/material.dart';
-
-
-
+import 'package:mc_dart/ui/home/home.dart';
+import 'package:mc_dart/ui/loan/loan.dart';
+import '../notification/notification.dart';
 
 class TabBarScreen extends StatefulWidget {
   @override
@@ -12,7 +14,7 @@ class _TabBarScreen extends State<TabBarScreen> {
   PageController pageController = PageController();
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
-    HomeView(),
+    HomeScreen(),
     LoanScreen(),
     NotificationScreen(),
     AccountScreen(),
