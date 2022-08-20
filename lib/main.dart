@@ -48,29 +48,32 @@ class MyStatelessWidget extends StatelessWidget {
 
 Widget menu() {
   return Container(
-      color: const Color(0xFF3F5AA6),
+      color: Colors.transparent,
       child: const TabBar(
-        labelColor: Colors.white,
-        unselectedLabelColor: Colors.white70,
+        labelColor: Colors.black,
+        unselectedLabelColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
-        indicatorPadding: EdgeInsets.all(5.0),
+        indicatorPadding: EdgeInsets.all(5),
+        labelPadding: EdgeInsets.only(left: 2, right: 2, bottom: 5),
+        labelStyle: TextStyle(fontSize: 13
+        ),
         indicatorColor: Colors.blue,
         tabs: [
           Tab(
-            text: "Transactions",
-            icon: Icon(Icons.euro_symbol),
+            text: "Màn hình chính",
+            icon: Icon(Icons.home),
           ),
           Tab(
-            text: "Bills",
-            icon: Icon(Icons.assignment),
+            text: "Tìm kiếm",
+            icon: Icon(Icons.search),
           ),
           Tab(
-            text: "Balance",
-            icon: Icon(Icons.account_balance_wallet),
+            text: "Thông báo",
+            icon: Icon(Icons.notifications),
           ),
           Tab(
-            text: "Options",
-            icon: Icon(Icons.settings),
+            text: "Thông tin cá nhân",
+            icon: Icon(Icons.person),
           ),
         ],
       ));
