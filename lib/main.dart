@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mc_dart/ui/home/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,7 +8,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Flutter Code Sample';
+  static const String _title = '';
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +30,12 @@ class MyStatelessWidget extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xFF3F5AA6),
-            title: const Text("Title text"),
+            title: const Text("Mom Care"),
           ),
           bottomNavigationBar: menu(),
           body: TabBarView(
             children: [
-              Container(child: Icon(Icons.directions_car)),
+              HomeScreen(),
               Container(child: Icon(Icons.directions_transit)),
               Container(child: Icon(Icons.directions_bike)),
               Container(child: Icon(Icons.directions_bike)),
@@ -55,8 +56,7 @@ Widget menu() {
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorPadding: EdgeInsets.all(5),
         labelPadding: EdgeInsets.only(left: 2, right: 2, bottom: 5),
-        labelStyle: TextStyle(fontSize: 13
-        ),
+        labelStyle: TextStyle(fontSize: 13),
         indicatorColor: Colors.blue,
         tabs: [
           Tab(

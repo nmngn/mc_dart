@@ -1,9 +1,6 @@
-
 import 'package:mc_dart/constants/assets.dart';
 import 'package:mc_dart/ui/common_view/account_verify_widget.dart';
-import 'package:mc_dart/ui/common_view/loan_type_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,92 +11,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: _buildAppBar(),
-      body: _buildBody(),
-    );
-  }
-
-  PreferredSizeWidget _buildAppBar() {
-    return AppBar(
-      actions: _buildActions(context),
-    );
-  }
-
-  List<Widget> _buildActions(BuildContext context) {
-    return <Widget>[
-      _buildProfile(),
-      _buildBody(),
-    ];
-  }
-
-  Widget _buildProfile() {
-    var imageProfile = Container(
-      child: Image.asset(
-        Assets.profileEmpty,
-        width: 40,
-        height: 40,
-      ),
-    );
-
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: imageProfile,
-          flex: 1,
-        ),
-        Expanded(
-          child: Column(children: const <Widget>[
-            Text('Name'),
-            Text('Phone'),
-          ]),
-        )
-      ],
-    );
-  }
-
-  Widget _buildBody() {
-    var imageProfile = ClipRRect(
-      child: Image.asset(
-        Assets.carBackground,
-        fit: BoxFit.cover,
-        width: 40,
-        height: 40,
-      ),
-      borderRadius: BorderRadius.circular(20),
-    );
-
-    var userInfo = Expanded(
-        child: Padding(
-      padding: EdgeInsets.only(left: 10, top: 12),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
-            Text(
-              'Name',
-              textAlign: TextAlign.left,
-            ),
-            Text('Phone', textAlign: TextAlign.left),
-          ]),
-    ));
-    return Stack(
-      children: [
-        _buildListView(),
-        Container(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              imageProfile,
-              userInfo,
-              Align(
-                child: AccountVerifyWidget(" xac thuc ", "success"),
-                alignment: Alignment.centerRight,
-              )
-            ],
-          ),
-          height: 60,
-          margin: EdgeInsets.only(left: 10),
-        ),
-      ],
+      body: _buildListView(),
     );
   }
 
@@ -109,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return _buildItem(position);
         },
         separatorBuilder: (context, position) {
-          return Divider();
+          return const Divider(color: Colors.transparent,);
         },
         itemCount: 6);
   }
@@ -118,202 +30,77 @@ class _HomeScreenState extends State<HomeScreen> {
     switch (position) {
       case 0:
         return Container(
-          child: _buildCellNotActive(),
-          margin: EdgeInsets.only(top: 40),
+          child: _cellProfile(),
+          margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
         );
       case 1:
         return Container(
-          child: _buildCellLoan(),
-          margin: EdgeInsets.only(left: 12, right: 12),
+          child: _cellAddItem(),
+          margin: const EdgeInsets.only(left: 12, right: 12),
         );
       case 2:
-        return _buildCellSlider();
+        return _cellItem();
       case 3:
-        return _buildCellListLoan();
+        return _cellItem();
       case 4:
-        return _buildCellListLoan();
+        return _cellItem();
       case 5:
-        return _buildCellListLoan();
+        return _cellItem();
       default:
         return Container(
-          child: _buildCellNotActive(),
-          margin: EdgeInsets.only(top: 40),
+          child: _cellItem(),
         );
     }
   }
 
-  Widget _buildCellNotActive() {
-    var bgHome = ClipRRect(
-      child: Image.asset(
-        Assets.bgHome,
-        fit: BoxFit.cover,
-        height: 174,
-        width: MediaQuery.of(context).size.width,
-      ),
-      borderRadius: BorderRadius.circular(10),
-    );
-
-    var bgSearch = ClipRRect(
-      child: Image.asset(
-        Assets.bgSearchHome,
-        fit: BoxFit.cover,
-        width: 72,
-        height: 72,
-      ),
-      borderRadius: BorderRadius.circular(36),
-    );
-
-    var backGround = SizedBox(
-      child: Stack(
-        children: <Widget>[
-          bgHome,
+  Widget _cellProfile() {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xffE8EBEE)),
+          borderRadius: BorderRadius.circular(10)),
+      height: 128,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Container(
-            height: 174,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  gradient: const LinearGradient(
-                      colors: [
-                        Color(0xFFAFFFF2),
-                        Color(0xFFFBFFFE),
-                      ],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.bottomCenter,
-                      stops: [0.0, 1.0],
-                      tileMode: TileMode.clamp),
-                ),
-                child: TextButton(
-                  child: Text("Bắt đầu ngay"),
-                  onPressed: () {},
-                ),
-                height: 36,
-                padding: EdgeInsets.only(left: 20, right: 20),
-                margin: EdgeInsets.only(bottom: 20),
-              ),
+            margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
+            child: const Text(
+              "Xin chào",
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+          ),
+           Container(
+            margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
+            child: const Text(
+              "Chúc bạn một ngày tốt lành !",
+              style: TextStyle(fontWeight: FontWeight.normal),
             ),
           ),
           Container(
-            child: bgSearch,
-            alignment: Alignment.topRight,
-            margin: EdgeInsets.only(top: 21, right: 12),
-          ),
-          SizedBox(
-            width: 244,
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text(
-                    "Xác Thực tài khoản",
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    "Xac thuc tai khoan de hoan thien ho so dang ki vay cua ban ngay!",
-                    textAlign: TextAlign.left,
-                  )
-                ],
-              ),
-              margin: EdgeInsets.only(left: 12, top: 20),
+            margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
+            child: Text(
+              "Bạn hiện đang có tất cả 15 sản phụ",
+              style: TextStyle(fontWeight: FontWeight.normal),
             ),
-          )
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
+            child: Text(
+              "Có 3 sản phụ dự kiến sinh trong tháng này",
+              style: TextStyle(fontWeight: FontWeight.normal),
+            ),
+          ),
         ],
       ),
     );
-
-    return Container(
-        child: backGround, margin: EdgeInsets.only(left: 16, right: 16));
   }
 
-  Widget _buildCellActive() {
-    return ClipRRect(
-      child: Image.asset(
-        Assets.carBackground,
-        fit: BoxFit.cover,
-        width: 40,
-        height: 40,
-      ),
-      borderRadius: BorderRadius.circular(20),
-    );
+  Widget _cellAddItem() {
+    return Container();
   }
 
-  Widget _buildCellLoan() {
-    return SizedBox(
-        height: 114,
-        child: Row(
-          children: [
-            Expanded(
-              child: Card(
-                child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          Assets.icLoan,
-                          height: 31,
-                          width: 31,
-                        ),
-                        Text("vay tien"),
-                        Text("da dang muc dich")
-                      ],
-                    ),
-                    margin: EdgeInsets.only(top: 16)),
-              ),
-              flex: 1,
-            ),
-            Expanded(
-              child: Card(
-                child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          Assets.icPay,
-                          height: 31,
-                          width: 47,
-                        ),
-                        Text("Tra no"),
-                        Text("Thanh toan dinh ki")
-                      ],
-                    ),
-                    margin: EdgeInsets.only(top: 16)),
-              ),
-              flex: 1,
-            ),
-          ],
-        ));
-  }
-
-  Widget _buildCellSlider() {
-    return ImageSlideshow(
-      width: double.infinity,
-      height: 200,
-      children: [
-        Image.asset(
-          Assets.carBackground,
-          fit: BoxFit.cover,
-        ),
-        Image.asset(
-          Assets.bgTest,
-          fit: BoxFit.cover,
-        ),
-        Image.asset(
-          Assets.bgHome,
-          fit: BoxFit.cover,
-        ),
-      ],
-      autoPlayInterval: 3000,
-
-      /// Loops back to first slide.
-      isLoop: true,
-      onPageChanged: (value) {
-        // print('Page changed: $value');
-      },
-      initialPage: 0,
-    );
-  }
-
-  Widget _buildCellListLoan() {
-    return LoanTypeWidget();
+  Widget _cellItem() {
+    return Container();
   }
 }
