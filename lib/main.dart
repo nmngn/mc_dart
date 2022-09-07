@@ -52,12 +52,10 @@ Widget menu() {
       color: Colors.transparent,
       child: const TabBar(
         labelColor: Colors.black,
-        unselectedLabelColor: Colors.black,
-        indicatorSize: TabBarIndicatorSize.tab,
-        indicatorPadding: EdgeInsets.all(5),
+        unselectedLabelColor: Colors.grey,
         labelPadding: EdgeInsets.only(left: 2, right: 2, bottom: 5),
         labelStyle: TextStyle(fontSize: 13),
-        indicatorColor: Colors.blue,
+        indicatorColor: Colors.transparent,
         tabs: [
           Tab(
             text: "Màn hình chính",

@@ -1,6 +1,6 @@
 import 'package:mc_dart/constants/assets.dart';
-import 'package:mc_dart/ui/common_view/account_verify_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:mc_dart/ui/common_view/home_common_view.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -21,7 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
           return _buildItem(position);
         },
         separatorBuilder: (context, position) {
-          return const Divider(color: Colors.transparent,);
+          return const Divider(
+            color: Colors.transparent,
+          );
         },
         itemCount: 6);
   }
@@ -39,17 +41,15 @@ class _HomeScreenState extends State<HomeScreen> {
           margin: const EdgeInsets.only(left: 12, right: 12),
         );
       case 2:
-        return _cellItem();
+        return _cellText('Dự kiến sinh trong tháng này( 0)');
       case 3:
-        return _cellItem();
+        return _cellText('Tất cả( 10)');
       case 4:
         return _cellItem();
       case 5:
         return _cellItem();
       default:
-        return Container(
-          child: _cellItem(),
-        );
+        return Container();
     }
   }
 
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
           ),
-           Container(
+          Container(
             margin: const EdgeInsets.only(left: 12, right: 12, top: 12),
             child: const Text(
               "Chúc bạn một ngày tốt lành !",
@@ -97,7 +97,38 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _cellAddItem() {
-    return Container();
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xffE8EBEE)),
+          borderRadius: BorderRadius.circular(10)),
+      height: 48,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(left: 12, right: 12),
+            child: Image.asset(
+              Assets.icAddUser,
+              width: 36,
+              height: 36,
+            ),
+          ),
+          const Text(
+            'Thêm thông tin mới',
+            style: TextStyle(fontWeight: FontWeight.w500),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _cellText(String text) {
+    return Container(
+      height: 24,
+      margin: const EdgeInsets.only(left: 16, right: 16),
+      child: Text(text, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
+    );
   }
 
   Widget _cellItem() {

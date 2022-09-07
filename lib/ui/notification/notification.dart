@@ -86,7 +86,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            Assets.icNotiBell,
+            Assets.icAddUser,
             height: 32,
             width: 32,
           ),
@@ -126,7 +126,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            Assets.icNotiDown,
+            Assets.icAddUser,
             height: 32,
             width: 32,
           ),
