@@ -1,6 +1,6 @@
 import 'package:mc_dart/constants/assets.dart';
 import 'package:flutter/material.dart';
-import 'package:mc_dart/ui/common_view/home_common_view.dart';
+import 'package:mc_dart/utils/routes/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -135,30 +135,53 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _cellItem() {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xffE8EBEE))),
-      height: 64,
-      margin: const EdgeInsets.only(left: 16, right: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(width: 16,),
-          Image.asset(Assets.icAddUser,
-          width: 48,
-          height: 48,),
-          const SizedBox(width: 12),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Name"), 
-              Text("0919908021")
-            ],
-          )
-        ],
+    return GestureDetector(
+      onTap: () => {
+        Navigator.of(context).pushReplacementNamed(Routes.detail)
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: const Color(0xffE8EBEE))),
+        height: 64,
+        margin: const EdgeInsets.only(left: 16, right: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              width: 16,
+            ),
+            Image.asset(
+              Assets.icAddUser,
+              width: 48,
+              height: 48,
+            ),
+            const SizedBox(width: 12),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [Text("Name"), Text("0919908021")],
+            ),
+            const Spacer(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [Text("24D1G"), Text("0919908021")],
+            ),
+            const SizedBox(
+              width: 12,
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 12),
+              child: Image.asset(
+                Assets.icAddUser,
+                width: 24,
+                height: 24,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
