@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mc_dart/model/user.dart';
 
 class DetailView extends StatelessWidget {
   const DetailView({super.key});
@@ -14,12 +18,23 @@ class MyDetailView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _MyDetailView();
+    return _MyDetailViewState();
   }
 }
 
-class _MyDetailView extends State<MyDetailView> {
+class _MyDetailViewState extends State<MyDetailView> {
   DateTime selectedDate = DateTime.now();
+  User currentUser = User();
+  XFile? avatarImage;
+
+  Future getImage() async {
+    var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        avatarImage = image;
+      });
+    }
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -32,6 +47,13 @@ class _MyDetailView extends State<MyDetailView> {
         selectedDate = picked;
       });
     }
+  }
+
+  String getCurrentDate() {
+    DateTime now = DateTime.now();
+    DateTime date = DateTime(
+        now.year, now.month, now.day, now.hour, now.minute, now.second.toInt());
+    return date.toString().replaceAll('.000', '');
   }
 
   @override
@@ -53,7 +75,7 @@ class _MyDetailView extends State<MyDetailView> {
 
   Widget bodyView() {
     return ListView.separated(
-      itemCount: 10,
+      itemCount: 11,
       itemBuilder: (context, index) {
         switch (index) {
           case 0:
@@ -72,8 +94,10 @@ class _MyDetailView extends State<MyDetailView> {
             return itemCell('Chieu cao');
           case 7:
             return ageCell();
-            case 8:
+          case 8:
             return itemCell('Ghi chu');
+          case 9:
+            return addPhotoCell();
           default:
             return Container();
         }
@@ -96,21 +120,27 @@ class _MyDetailView extends State<MyDetailView> {
         children: [
           Stack(children: [
             Container(
-              height: 144,
-              width: 144,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(75), color: Colors.amber),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(75),
-                  child: Image.asset('assets/image/avatar.jpeg')),
-            ),
+                height: 144,
+                width: 144,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(75)),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(75),
+                    child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: avatarImage == null
+                            ? Image.asset('assets/image/avatar.jpeg')
+                            : Image.file(File(avatarImage!.path))))),
             Positioned(
               height: 36,
               width: 36,
               bottom: 0,
               right: 0,
               child: FloatingActionButton(
-                  onPressed: () {}, child: Image.asset('assets/image/add.png')),
+                  onPressed: () {
+                    getImage();
+                  },
+                  child: Image.asset('assets/image/take_photo.png')),
             )
           ])
         ],
@@ -121,15 +151,15 @@ class _MyDetailView extends State<MyDetailView> {
   Widget infomationCell() {
     return Container(
         padding: const EdgeInsets.only(left: 24, right: 24),
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Thong tin chung',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text('Ngay dang ki: 25/32/2020')
+            Text('Ngay dang ki: ${getCurrentDate()}')
           ],
         ));
   }
@@ -264,5 +294,19 @@ class _MyDetailView extends State<MyDetailView> {
             ),
           ],
         ));
+  }
+
+  Widget addPhotoCell() {
+    return Container(
+      padding: const EdgeInsets.only(right: 24, left: 24),
+      height: 38,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text("Anh kem theo", style: TextStyle(fontWeight: FontWeight.w500))
+        ],
+      ),
+    );
   }
 }
